@@ -3,7 +3,7 @@ import json
 
 # Informations à inclure dans le QR Code
 data = {
-    "url": "https://anime-sama.fr/catalogue/shingeki-no-kyojin/",}
+    "url": "https://anime-sama.fr/catalogue/shingeki-no-kyojin/"}
 
 
 # Convertir les informations en format JSON
