@@ -3,17 +3,8 @@ import json
 
 # Informations à inclure dans le QR Code
 data = {
-    "url": "https://anime-sama.fr/catalogue/shingeki-no-kyojin/",
-    "geo": {
-        "latitude": 37.7749,
-        "longitude": -122.4194
-    },
-    "wifi": {
-        "ssid": "YourNetworkSSID",
-        "auth_type": "WPA",  # Peut être WPA, WEP ou nopass
-        "password": "YourNetworkPassword"
-    }
-}
+    "url": "https://anime-sama.fr/catalogue/shingeki-no-kyojin/",}
+
 
 # Convertir les informations en format JSON
 json_data = json.dumps(data)
