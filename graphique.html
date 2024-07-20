@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Générateur de QR Code</title>
+    <style>
+        /* Ajout de styles de base */
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background-image: url('https://img.freepik.com/photos-gratuite/abstrait-numerique-grille-fond-noir_53876-97647.jpg?size=626&ext=jpg');
+            color: #333;
+        }
+
+        .container {
+            text-align: center;
+            background: white;
+            padding: 30px 20px;
+            border-radius: 12px;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+            max-width: 400px;
+            width: 100%;
+            margin: 20px;
+            background-image: url('https://img.freepik.com/vecteurs-libre/formes-modernes-fond-sombre_23-2148420941.jpg?w=900&t=st=1721239011~exp=1721239611~hmac=b5f3c118426047c3bba81c266481cda25861f9c840b270494ccd04d9a504ff0e'); /* Remplace par l'URL de ton image */
+            background-size: cover;
+            background-position: center;
+        }
+
+        .form-group {
+            margin-bottom: 15px;
+        }
+
+        #data-input {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
+
+        #generate-btn, #download-btn {
+            padding: 12px 25px;
+            border: none;
+            background-color: #007bff;
+            color: white;
+            border-radius: 4px;
+            cursor: pointer;
+            margin-top: 10px;
+            transition: background-color 0.3s ease;
+        }
+
+        #generate-btn:hover, #download-btn:hover {
+            background-color: #0056b3;
+        }
+
+        .qr-code-display {
+            margin-top: 20px;
+            display: flex;
+            justify-content: center;
+        }
+
+        .qr-code-display img {
+            border-radius: 15px; /* Pour arrondir les coins du QR code */
+        }
+
+        .hidden {
+            display: none;
+        }
+
+        /* Ajout d'animations et de styles supplémentaires */
+        h1 {
+            font-size: 24px;
+            margin-bottom: 20px;
+            color: #fff;
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1);
+        }
+
+        label {
+            font-size: 16px;
+            color: #444;
+        }
+
+        input[type="text"]::placeholder {
+            color: #aaa;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        .container {
+            animation: fadeIn 1s ease-in;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Générateur de QR Code</h1>
+        <div class="form-group">
+            <label for="data-input">Entrez les données :</label>
+            <input type="text" id="data-input" placeholder="Tapez vos données ici..." value="https://anime-sama.fr/catalogue/shingeki-no-kyojin">
+        </div>
+        <button id="generate-btn">Générer le QR Code</button>
+        <div id="qr-code-display" class="qr-code-display"></div>
+        <button id="download-btn" class="hidden">Télécharger le QR Code</button>
+    </div>
+
+    <script>
+        // Tableau des couleurs
+        const colors = ['#ff0000', '#0000ff', '#00ff00', '#ff00ff'];
+
+        // Fonction pour obtenir une couleur aléatoire
+        function getRandomColor() {
+            return colors[Math.floor(Math.random() * colors.length)];
+        }
+
+        // Code QR fourni par l'autre personne
+        function generateQRCodeFromData(data, container) {
+            const color = getRandomColor();
+            // Utilisation de la bibliothèque QRCode.js pour générer le QR Code
+            new QRCode(container, {
+                text: data,
+                width: 128,
+                height: 128,
+                colorDark : color,
+                colorLight : "#ffffff",
+                correctLevel : QRCode.CorrectLevel.H
+            });
+        }
+
+        // Script pour intégrer et gérer l'interface utilisateur
+        document.getElementById('generate-btn').addEventListener('click', function() {
+            const data = document.getElementById('data-input').value;
+            if (data) {
+                const qrCodeContainer = document.getElementById('qr-code-display');
+                qrCodeContainer.innerHTML = ''; // Clear previous QR Code
+
+                // Appel de la fonction de génération de QR Code fournie par l'autre personne
+                generateQRCodeFromData(data, qrCodeContainer);
+
+                // Afficher le bouton de téléchargement
+                const downloadBtn = document.getElementById('download-btn');
+                downloadBtn.classList.remove('hidden');
+                downloadBtn.addEventListener('click', function() {
+                    const qrCodeImage = qrCodeContainer.querySelector('img').src;
+                    const link = document.createElement('a');
+                    link.href = qrCodeImage;
+                    link.download = 'qrcode.png';
+                    link.click();
+                });
+            } else {
+                alert('Veuillez entrer des données à convertir en QR Code.');
+            }
+        });
+
+        // Générer un QR code au chargement de la page
+        window.addEventListener('load', function() {
+            const data = document.getElementById('data-input').value;
+            if (data) {
+                const qrCodeContainer = document.getElementById('qr-code-display');
+                qrCodeContainer.innerHTML = ''; // Clear previous QR Code
+                generateQRCodeFromData(data, qrCodeContainer);
+            }
+        });
+    </script>
+    <!-- Inclusion de la bibliothèque QRCode.js -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+</body>
+</html>
