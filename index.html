@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500&display=swap" rel="stylesheet" />
+    <title>QR Code</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(135deg, #f4c9ff, #a600ff);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            padding: 2rem;
+        }
+
+        .title {
+            text-align: center;
+            color: #253237;
+            margin-bottom: 2rem;
+        }
+
+        h1 {
+            font-weight: 500;
+            font-size: 2.5rem;
+            margin-bottom: 0.5rem;
+        }
+
+        h2 {
+            font-weight: 300;
+            font-size: 1.5rem;
+            color: #465c69;
+        }
+
+        form {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 2rem;
+        }
+
+        form input {
+            font-size: 1rem;
+            padding: 0.8rem;
+            width: 300px;
+            background: #fff;
+            color: #253237;
+            border: 2px solid #c1d3fe;
+            border-radius: 0.5rem;
+            outline: none;
+            transition: border-color 0.3s ease;
+        }
+
+        form input:focus {
+            border-color: #295479;
+        }
+
+        form button {
+            font-size: 1rem;
+            background: #295479;
+            border: none;
+            color: white;
+            padding: 0.8rem 1.5rem;
+            cursor: pointer;
+            border-radius: 0.5rem;
+            transition: background 0.3s ease;
+        }
+
+        form button:hover {
+            background: #3b6da0;
+        }
+
+        .generated {
+            text-align: center;
+        }
+
+        .generated img {
+            max-width: 50%;
+            height: auto;
+            margin-bottom: 1rem;
+        }
+
+        .generated p {
+            font-size: 1.1rem;
+            color: #253237;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="title">
+        <h1>QR Code</h1>
+        <h2>Insert a link below to generate a QR Code</h2>
+    </div>
+    <form action="/" method="POST">
+        <input type="text" name="link" placeholder="Enter URL here">
+        <button type="submit">Generate QR Code</button>
+    </form>
+<!-- Ce bloc de code est conçu pour afficher un QR code généré seulement si la variable data contient des données. Lorsque l’utilisateur soumet un lien, ce lien est converti en QR code, encodé en base64 et stocké dans data. Si data est présent, le template HTML affiche le QR code et un message explicatif. Sinon, rien n’est affiché. --> 
+    {% if data %} 
+    <div class="generated">
+        <img src="{{data}}" alt="Generated QR Code">
+        <p>Here is the QR code we generated for you 🚀</p>
+    </div>
+    {% endif %} 
+</body>
+
+</html>
