@@ -1,4 +1,6 @@
-from flask import Flask, render_template,request  # Impotation de Flask, render_template : Cette fonction permet de rendre (ou afficher) des templates HTML. Elle prend en entrée le nom du fichier template et les variables optionnelles à passer au template. request : Cet objet contient toutes les données relatives à la requête HTTP entrante. Il permet d’accéder aux données de formulaire soumises par l’utilisateur.
+from flask import Flask, render_template,request  # Impotation de Flask, render_template : Cette fonction permet de rendre (ou afficher) des templates HTML. 
+# Elle prend en entrée le nom du fichier template et les variables optionnelles à passer au template. 
+# request : Cet objet contient toutes les données relatives à la requête HTTP entrante. Il permet d’accéder aux données de formulaire soumises par l’utilisateur.
 import qrcode # Impotation du qrcode
 from io import BytesIO # Importation de BytesIO de la bibliothèque io. BytesIO est utilisé pour gérer les données binaires en mémoire comme s’il s’agissait d’un fichier.
 from base64 import b64encode # Importation de la fonction b64encode de la bibliothèque base64. Elle permet de convertir des données binaires en chaîne de caractères encodée en base64, utile pour l’affichage d’images directement dans le code HTML.
